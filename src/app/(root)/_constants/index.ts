@@ -1,9 +1,6 @@
 import { Monaco } from "@monaco-editor/react";
-// Assuming 'Theme' type is defined in a 'types.ts' file at the root or a common location.
-// Adjust the path if your 'types.ts' file is located elsewhere.
-import { Theme } from "../../../types"; 
+import { Theme } from "../../../types";
 
-// 1. Define the type for language configuration
 type LanguageConfig = Record<
   string,
   {
@@ -16,7 +13,6 @@ type LanguageConfig = Record<
   }
 >;
 
-// 2. Define the LANGUAGE_CONFIG constant
 export const LANGUAGE_CONFIG: LanguageConfig = {
   javascript: {
     id: "javascript",
@@ -340,23 +336,25 @@ print("Sum of numbers: \\(sum)")`,
   },
 };
 
-// 3. Define the allowed built-in themes for Monaco Editor
-// These are the only valid values for the 'base' property in defineTheme
-type BuiltinMonacoTheme = 'vs' | 'vs-dark' | 'hc-black';
+export const THEMES: Theme[] = [
+  { id: "vs-dark", label: "VS Dark", color: "#1e1e1e" },
+  { id: "vs", label: "VS Light", color: "#ffffff" },
+  { id: "github-dark", label: "GitHub Dark", color: "#0d1117" },
+  { id: "monokai", label: "Monokai", color: "#272822" },
+  { id: "solarized-dark", label: "Solarized Dark", color: "#002b36" },
+];
 
-// 4. Define the structure for your custom theme definitions
-interface MonacoThemeData {
-  base: BuiltinMonacoTheme; // Now strictly typed
+// Update THEME_DEFINITONS type for base
+interface ThemeDefinition {
+  base: "vs" | "vs-dark" | "hc-black";
   inherit: boolean;
-  // Expanded rules to include optional properties for better type accuracy
-  rules: Array<{ token: string; foreground: string; background?: string; fontStyle?: string; }>;
+  rules: Array<{ token: string; foreground: string }>;
   colors: Record<string, string>;
 }
 
-// 5. Apply the new MonacoThemeData type to THEME_DEFINITONS
-export const THEME_DEFINITONS: Record<string, MonacoThemeData> = {
+export const THEME_DEFINITONS: Record<string, ThemeDefinition> = {
   "github-dark": {
-    base: "vs-dark", // This is now correctly typed
+    base: "vs-dark",
     inherit: true,
     rules: [
       { token: "comment", foreground: "6e7681" },
@@ -380,7 +378,7 @@ export const THEME_DEFINITONS: Record<string, MonacoThemeData> = {
     },
   },
   monokai: {
-    base: "vs-dark", // This is now correctly typed
+    base: "vs-dark",
     inherit: true,
     rules: [
       { token: "comment", foreground: "75715E" },
@@ -404,7 +402,7 @@ export const THEME_DEFINITONS: Record<string, MonacoThemeData> = {
     },
   },
   "solarized-dark": {
-    base: "vs-dark", // This is now correctly typed
+    base: "vs-dark",
     inherit: true,
     rules: [
       { token: "comment", foreground: "586e75" },
@@ -427,36 +425,25 @@ export const THEME_DEFINITONS: Record<string, MonacoThemeData> = {
       "editor.selectionHighlightBackground": "#073642",
     },
   },
+  "vs": {
+    base: "vs",
+    inherit: true,
+    rules: [],
+    colors: {
+      "editor.background": "#ffffff",
+      "editor.foreground": "#000000",
+    },
+  },
 };
-
-// Your existing THEMES array (assuming 'Theme' type is defined elsewhere)
-export const THEMES: Theme[] = [
-  { id: "vs-dark", label: "VS Dark", color: "#1e1e1e" },
-  { id: "vs-light", label: "VS Light", color: "#ffffff" },
-  { id: "github-dark", label: "GitHub Dark", color: "#0d1117" },
-  { id: "monokai", label: "Monokai", color: "#272822" },
-  { id: "solarized-dark", label: "Solarized Dark", color: "#002b36" },
-];
 
 // Helper function to define themes in Monaco
 export const defineMonacoThemes = (monaco: Monaco) => {
-  // This helper function now acts as a runtime safeguard, ensuring that even if
-  // a 'base' value somehow slips through with an invalid string (e.g., from an API),
-  // it will fall back to a valid Monaco theme.
-  const toBuiltinTheme = (base: string): BuiltinMonacoTheme => {
-    if (base === "vs" || base === "vs-dark" || base === "hc-black") return base;
-    console.warn(`Invalid Monaco theme base '${base}'. Falling back to 'vs-dark'.`);
-    return "vs-dark";
-  };
-
   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {
-      base: toBuiltinTheme(themeData.base), // Apply the helper here for safety
+      base: themeData.base,
       inherit: themeData.inherit,
       rules: themeData.rules.map((rule) => ({
         ...rule,
-        // The foreground property is already correctly typed as string in the rule,
-        // so this mapping is mostly for consistency or if you had other transformations.
         foreground: rule.foreground,
       })),
       colors: themeData.colors,
