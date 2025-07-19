@@ -31,7 +31,7 @@ code-shimasu aims to simplify the process of sharing and executing code online. 
 
 ## ✨ Platform Overview
 <div align="center">
-  <img src="@/images/overview.png" alt="Platform Overview" width="600" height="auto" />
+  <img src="public/images/overview.png" alt="Platform Overview" width="600" />
   <p><em>A snapshot of the code-shimasu platform, showing the main dashboard and editor interface.</em></p>
 </div>
 
@@ -39,7 +39,7 @@ code-shimasu aims to simplify the process of sharing and executing code online. 
 
 ## 📊 Coder Statistics
 <div align="center">
-  <img src="@/images/coders-stats.png" alt="Coder Stats" width="600" height="auto" />
+  <img src="public/images/coders-stats.png" alt="Coder Stats" width="600" />
   <p><em>Visualize your coding activity and progress with detailed statistics and charts.</em></p>
 </div>
 
@@ -47,7 +47,7 @@ code-shimasu aims to simplify the process of sharing and executing code online. 
 
 ## 🏠 Homepage Preview
 <div align="center">
-  <img src="@/images/homepage.png" alt="Homepage Preview" width="600" height="auto" />
+  <img src="public/images/homepage.png" alt="Homepage Preview" width="600" />
   <p><em>The welcoming homepage, providing quick access to the editor and user profile.</em></p>
 </div>
 
