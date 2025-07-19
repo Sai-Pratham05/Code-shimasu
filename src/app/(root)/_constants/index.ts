@@ -421,9 +421,14 @@ export const THEME_DEFINITONS = {
 
 // Helper function to define themes in Monaco
 export const defineMonacoThemes = (monaco: Monaco) => {
+  const toBuiltinTheme = (base: string): "vs" | "vs-dark" | "hc-black" => {
+    if (base === "vs" || base === "vs-dark" || base === "hc-black") return base;
+    // fallback to 'vs-dark' if not valid
+    return "vs-dark";
+  };
   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {
-      base: themeData.base as "vs" | "vs-dark" | "hc-black",
+      base: toBuiltinTheme(themeData.base),
       inherit: themeData.inherit,
       rules: themeData.rules.map((rule) => ({
         ...rule,
