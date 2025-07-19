@@ -27,6 +27,32 @@ code-shimasu aims to simplify the process of sharing and executing code online. 
 - **Modern UI:** Enjoy a clean, responsive interface that works seamlessly on both desktop and mobile devices.
 - **Collaboration:** Work together with others in real-time, making it perfect for pair programming, code reviews, or teaching.
 
+---
+
+## ✨ Platform Overview
+<div align="center">
+  <img src="@/images/overview.png" alt="Platform Overview" width="600" height="auto" />
+  <p><em>A snapshot of the code-shimasu platform, showing the main dashboard and editor interface.</em></p>
+</div>
+
+---
+
+## 📊 Coder Statistics
+<div align="center">
+  <img src="@/images/coders-stats.png" alt="Coder Stats" width="600" height="auto" />
+  <p><em>Visualize your coding activity and progress with detailed statistics and charts.</em></p>
+</div>
+
+---
+
+## 🏠 Homepage Preview
+<div align="center">
+  <img src="@/images/homepage.png" alt="Homepage Preview" width="600" height="auto" />
+  <p><em>The welcoming homepage, providing quick access to the editor and user profile.</em></p>
+</div>
+
+---
+
 ## Getting Started
 
 ### Prerequisites
